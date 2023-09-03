@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+      <h2>My Recipe List</h2>
+      <br>
+      <div class="row row-cols-1 row-cols-md-4 g-3">
+            {% for recipe in recipes %}
+            {% csrf_token %}
+            <div class="col">
+                  <div class="card h-100">
+                        <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                        <div class="card-body">
+                              <h5 class="card-title">{{ recipe.title}}</h5>
+                              <p class="card-text">This is a "{{recipe.title}}" recipe for making your {{recipe.category}} time feeling much more joyful..Make your day beautiful with our amazing recipies</p>
+                        </div>
+                  </div>
+            </div>
+
+            {% endfor %}
+
+      </div>
+</div>
+
+{% endblock %}

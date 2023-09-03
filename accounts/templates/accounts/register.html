@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+      background-color: #f0f0f0;
+  }
+
+  .container {
+    background-image: linear-gradient(to right, rgb(127, 163, 126), rgb(83, 165, 108));
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px 40px 20px 40px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      margin-top: 50px;
+  }
+
+  .button-block{
+    text-align: center;
+  }
+  .text-col {
+    color: #fff;
+  }
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  label {
+      font-weight: bold;
+  }
+
+  .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  .btn-primary {
+      background-color: #007BFF;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .btn-primary:hover {
+      background-color: #0056b3;
+  }
+
+  .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+  }
+
+  /* Style for the "Already have an account?" text and "Login" link */
+  .login-text {
+      text-align: center;
+      margin-top: 20px;
+  }
+
+  .login-link {
+      color: #007BFF;
+      text-decoration: none;
+  }
+
+  .login-link:hover {
+      text-decoration: underline;
+  }
+
+  .errorlist {
+    color: red;
+  }
+</style>
+
+<div class="container">
+    <h2 class="text-center text-col">Registration</h2>
+    <form id="RegistrationForm" method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="username" class="text-col">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+            <!-- Display username field errors -->
+            {% if form.username.errors %}
+                <ul class="errorlist">
+                    {% for error in form.username.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    
+        <div class="form-group">
+            <label for="email" class="text-col">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            <!-- Display email field errors -->
+            {% if form.email.errors %}
+                <ul class="errorlist">
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    
+        <div class="form-group">
+            <label for="password1" class="text-col">Password</label>
+            <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter your password" required>
+            <!-- Display password1 field errors -->
+            {% if form.password1.errors %}
+                <ul class="errorlist">
+                    {% for error in form.password1.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    
+        <div class="form-group">
+            <label for="password2" class="text-col">Confirm Password</label>
+            <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm your password" required>
+            <!-- Display password2 field errors -->
+            {% if form.password2.errors %}
+                <ul class="errorlist">
+                    {% for error in form.password2.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    
+        <div class="button-block"><button type="submit" class="btn btn-success text-white">Submit</button></div>
+    </form>
+    
+    <!-- Display non-field errors (e.g., password mismatch) -->
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <p class="login-text text-col">Already have an account? <a class="text-col" href="{% url 'login12' %}">Login</a></p>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+{% comment %} {% block content %}
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %} {% endcomment %}

@@ -1,0 +1,100 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+<style>
+  .container 
+  {
+    background-image: linear-gradient(to right, rgb(127, 163, 126), rgb(83, 165, 108));
+    background-color: #fff;
+      max-width: 400px;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-login{
+    text-decoration: none;
+      text-align: center;
+      color: white;
+      
+  }
+
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  label {
+      font-weight: bold;
+      color: #fff;
+  }
+  .btn-name{
+    color: white;
+  }
+  .btn-block{
+    text-align: center;
+  }
+  .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  button.btn-primary {
+      background-color: #007BFF;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  button.btn-primary:hover {
+      background-color: #0056b3;
+  }
+
+  .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+  }
+
+  .button-link {
+      color: #000000;
+  }
+</style>
+<br><br>
+  <div class="container mt-5">
+    <h2 class="text-center btn-login">Login</h2>
+    <form id="loginForm" method="post">
+        {% csrf_token %}
+        <div class="form-group btn-name">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="form-group btn-name">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <br>
+        <div class="btn-block"><button type="submit" class="btn btn-success text-white ">Login</button></div><br>
+    </form>
+    <p class="text-center button-link">Not registered? <a class="btn-login" href="{% url 'register' %}">Click to Register!</a></p>
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Error:</strong> Please check your username and password.
+        </div>
+    {% endif %}
+  </div>
+
+
+
+{% endblock %}
+
