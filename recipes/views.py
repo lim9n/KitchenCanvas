@@ -22,19 +22,18 @@ def display_recipes(request, category=None):
 
     return render(request, 'recipes/recipe_list.html', {'recipes': recipes})
 
-@login_required
-def search_recipes(request):
-    keyword = ''
-    keyword = request.GET['q']
-    print(keyword)
-    if keyword:
-        ingredients = keyword.split(',')
-        search_recipes = Recipe.objects.filter(ingredients__icontains=ingredients[0].strip())
-        for ingredient in ingredients[1:]:
-            search_recipes = search_recipes | Recipe.objects.filter(ingredients__icontains=ingredient.strip())
-    else:
-        search_recipes = Recipe.objects.all()
-        
-        
-    context={'search_recipes': search_recipes, 'keyword': keyword}
-    return render(request, 'recipes/search.html', context)
+def search_posts(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        results = Recipe.objects.filter(title__icontains=query)
+
+    context = {
+        'results': results,
+        'submitbutton': 'Search',
+    }
+
+    return render(request, 'search.html', context)
+
+

@@ -1,22 +1,32 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
 
-{% block content %}
+    <form action="{% url 'search:searchposts' %}" method="GET" value="{{ request.GET.q }}">
+        Search <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search posts"/>
+        <input type="submit" name="submit" value="Search"/>
+    </form>
 
-<br>
-<h2>Recipes:</h2>
-<div class="row row-cols-1 row-cols-md-4 g-3">
+    {% if submitbutton == 'Search' and request.GET.q != '' %}
+        {% if results %}
+            <h2>Results for <b>{{ request.GET.q }}</b></h2>
+            <br/><br/>
 
-    {% for recipe in search_recipes %}
-    <div class="col">
-        <div class="card h-100">
-            <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
-            <div class="card-body">
-                <h5 class="card-title">{{ recipe.title }}</h5>
-                <p class="card-text">{{ recipe.instructions }}</p>
-            </div>
-        </div>
-    </div>
-
-    {% endfor %}
-</div>
-{% endblock %}
+            <ul>
+                {% for result in results %}
+                    <li>
+                        {{ result.title }}<br/>
+                        {{ result.content }}<br/>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No search results for this query.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
