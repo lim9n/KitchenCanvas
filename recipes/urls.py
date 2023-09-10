@@ -7,3 +7,4 @@ urlpatterns = [
     path('search/', views.search_posts, name='searchposts'),
     
 ]
+  

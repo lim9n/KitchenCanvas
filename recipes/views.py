@@ -24,7 +24,7 @@ def display_recipes(request, category=None):
 
 def search_posts(request):
     query = request.GET.get('q', '')
-    results = []
+    results = []  
 
     if query:
         results = Recipe.objects.filter(title__icontains=query)
